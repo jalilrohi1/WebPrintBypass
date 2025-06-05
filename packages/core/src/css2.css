@@ -1,0 +1,19 @@
+@media print {
+  /* ACE Editor content */
+  .ace_content, .ace_text-layer, .ace_line {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* MathJax equations */
+  .MathJax, .MJXp-math, .MathJax_Display {
+    display: inline-block !important;
+    visibility: visible !important;
+  }
+
+  /* General fallback (minimal) */
+  body * {
+    visibility: visible !important;
+    display: block !important;
+  }
+}

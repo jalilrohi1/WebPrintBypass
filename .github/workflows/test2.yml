@@ -1,0 +1,28 @@
+# .github/workflows/test.yml
+name: Test WebPrintBypass
+
+on: [push]
+
+jobs:
+  test-node-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: cd puppeteer && npm install
+      - run: node puppeteer/cli.js --url "https://2024.aulaweb.unige.it/mod/quiz/review.php?attempt=286411&cmid=140930" --output "test_node.pdf"
+
+  test-python-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      - run: pip install playwright && playwright install chromium
+      - run: python python/cli.py --url "https://2024.aulaweb.unige.it/mod/quiz/review.php?attempt=286411&cmid=140930" --output "test_python.pdf"
+      - run: ls -l test_python.pdf  # Verify PDF was created 
